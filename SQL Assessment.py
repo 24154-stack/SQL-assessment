@@ -3,7 +3,7 @@
 import sqlite3
 
 #open file
-DATABASE = "NAL Pro Players R6S.db"
+DATABASE = "NAL_R6S_Pros.db"
 
 
 def execute_query(query, params=()):
@@ -36,7 +36,7 @@ def user_search():
                      "role": "Role",
                      "lifetime_rating_siegegg": "Lifetime SiegeGG rating",
                      "notable_achievements": "Notable achievements"}
-    query = 'SELECT * FROM "NAL Pro Players R6S" WHERE 1=1'
+    query = 'SELECT * FROM NAL_R6S_Pros WHERE 1=1'
     params = []
     print("Search Filters (Leave blank to skip)")
     for col, label in search_fields.items():
