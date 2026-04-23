@@ -40,20 +40,21 @@ def user_search():
     params = []
     print("Search Filters (Leave blank to skip)")
     for col, label in search_fields.items():
-        # Handle text-based search for names and manufacturers
+        # Handle text-based search for name, role and team
         if col in ["player_name", "team_name", "role"]:
             val = input(f"{label} (contains): ").strip()
             if val:
                 query += f" AND {col} LIKE ?"
                 params.append(f"%{val}%")
+        #extra information for achievement formating
         elif col in ["notable_achievements"]:
-            print("Format is [place] [type of event] [year]")
-            print("eg. Manchester Major 2024")
+            print("Format is [Event name] [year]")
+            print("eg. Manchester Major 2024, SI 2025, Esports World Cup 2024")
             val = input(f"{label} (contains): ").strip()
             if val:
                 query += f" AND {col} LIKE ?"
                 params.append(f"%{val}%")
-        # Handle numerical range search for Speed and Year
+        # Handle numerical range search for Siege GG rating
         else:
             val = input(f"Enter {label} value: ").strip()
             if val:
@@ -65,9 +66,9 @@ def user_search():
                 op = operators.get(choice, "=") # default is equals
                 
                 query += f" AND {col} {op} ?"
-                params.append(val)
-    if "lifetime_kd" in query:
-        query += " ORDER BY lifetime_kd DESC"
+                params.append(float(val))
+    if "lifetime_rating_siegegg" in query:
+        query += " ORDER BY lifetime_rating_siegegg DESC"
     # Convert list to tuple for sqlite3
     execute_query(query, tuple(params))
 
