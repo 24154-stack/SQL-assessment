@@ -39,6 +39,7 @@ def user_search():
     query = 'SELECT * FROM NAL_R6S_Pros WHERE 1=1'
     params = []
     print("Search Filters (Leave blank to skip)")
+    print("Roles: Entry, Flex, Support, IGL")
     for col, label in search_fields.items():
         # Handle text-based search for name, role and team
         if col in ["player_name", "team_name", "role"]:
@@ -67,8 +68,7 @@ def user_search():
                 
                 query += f" AND {col} {op} ?"
                 params.append(float(val))
-    if "lifetime_rating_siegegg" in query:
-        query += " ORDER BY lifetime_rating_siegegg DESC"
+    query += " ORDER BY lifetime_rating_siegegg DESC"
     # Convert list to tuple for sqlite3
     execute_query(query, tuple(params))
 
