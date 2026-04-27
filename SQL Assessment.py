@@ -68,7 +68,7 @@ def user_search():
                 
                 query += f" AND {col} {op} ?"
                 params.append(float(val))
-    query += " ORDER BY lifetime_rating_siegegg DESC"
+    query += " ORDER BY lifetime_siegegg_rating DESC"
     # Convert list to tuple for sqlite3
     execute_query(query, tuple(params))
 
