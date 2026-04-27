@@ -3,7 +3,7 @@
 import sqlite3
 
 #open file
-DATABASE = "NAL.db"
+DATABASE = "Rainbow_Six_Siege_Pro_Players.db"
 
 
 def execute_query(query, params=()):
@@ -34,7 +34,7 @@ def user_search():
     search_fields = {"player_name": "Player name",
                      "team_name": "Team name",
                      "role": "Role",
-                     "lifetime_rating_siegegg": "Lifetime SiegeGG rating",
+                     "lifetime_siegegg_rating": "Lifetime SiegeGG rating",
                      "notable_achievements": "Notable achievements"}
     query = 'SELECT * FROM NAL WHERE 1=1'
     params = []
