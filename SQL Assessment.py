@@ -71,8 +71,15 @@ def user_search():
     while True:
         order_query = input("Would you like to sort by SiegeGG rating? (Yes/No) ").lower()
         if order_query == "yes":
-            query += " ORDER BY lifetime_siegegg_rating DESC"
-            break
+            order_type = input("Ascending or descending? (ASC/DESC): ").upper()
+            if order_type == "ASC":
+                query += " ORDER BY lifetime_siegegg_rating ASC"
+                break
+            elif order_type == "DESC":
+                query += " ORDER BY lifetime_siegegg_rating DESC"
+                break
+            else:
+                print("Not a valid input, please try again")
         elif order_query == "no":
             break
         else:
