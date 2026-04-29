@@ -68,7 +68,15 @@ def user_search():
                 
                 query += f" AND {col} {op} ?"
                 params.append(float(val))
-    query += " ORDER BY lifetime_siegegg_rating DESC"
+    while True:
+        order_query = input("Would you like to sort by SiegeGG rating? (Yes/No) ").lower()
+        if order_query == "yes":
+            query += " ORDER BY lifetime_siegegg_rating DESC"
+            break
+        elif order_query == "no":
+            break
+        else:
+            print("Not a valid input, please try again")
     # Convert list to tuple for sqlite3
     execute_query(query, tuple(params))
 
