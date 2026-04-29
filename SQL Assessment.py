@@ -57,17 +57,24 @@ def user_search():
                 params.append(f"%{val}%")
         # Handle numerical range search for Siege GG rating
         else:
-            val = input(f"Enter {label} value: ").strip()
-            if val:
-                print(f"Match {label}: [1] Exactly  [2] Greater Than  [3] Less Than")
-                choice = input("Select (1/2/3): ")
-                
-                # give user choice of operator
-                operators = {"1": "=", "2": ">=", "3": "<="}
-                op = operators.get(choice, "=") # default is equals
-                
-                query += f" AND {col} {op} ?"
-                params.append(float(val))
+            while True:
+                val = input(f"{label} (contains): ").strip()
+                if val == "":
+                    break
+                try:
+                    value = float(val)
+                    print(f"Match {label}: [1] Exactly  [2] Greater Than  [3] Less Than")
+                    choice = input("Select (1/2/3): ")
+                    
+                    # give user choice of operator
+                    operators = {"1": "=", "2": ">=", "3": "<="}
+                    op = operators.get(choice, "=") # default is equals
+                        
+                    query += f" AND {col} {op} ?"
+                    params.append(float(value))
+                    break
+                except:
+                    print("Not a valid input, please try again.")
     while True:
         order_query = input("Would you like to sort by SiegeGG rating? (Yes/No) ").lower()
         if order_query == "yes":
